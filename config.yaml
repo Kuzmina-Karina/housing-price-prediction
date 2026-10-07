@@ -1,0 +1,38 @@
+# Обозначение задачи
+data_task_name:
+  name: "table-data" # УКАЗАТЬ ТИП РЕШАЕМОЙ ЗАДАЧИ
+  # возможные значения name: "images", "table-data", "texts"
+
+
+# Конфигурация проекта прогнозирования стоимости недвижимости
+data:
+  # Источник данных (kaggle или fallback URL)
+  source: kaggle
+  kaggle_dataset: harlfoxem/housesalesprediction
+  fallback_url: "https://raw.githubusercontent.com/karan-shah/usa-housing-dataset/main/USA_Housing.csv"
+  test_size: 0.2
+  random_state: 42
+
+model:
+  # Тип модели
+  type: hist_gradient_boosting
+  # Параметры HistGradientBoostingRegressor (scikit-learn)
+  params:
+    max_iter: 200
+    learning_rate: 0.08
+
+paths:
+  model: models/model.pkl
+  features: models/model_features.pkl
+  scaler: models/scaler.pkl
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  reload: false
+  title: "USA Housing Price Prediction API"
+  version: "1.0.0"
+
+logging:
+  level: INFO
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
